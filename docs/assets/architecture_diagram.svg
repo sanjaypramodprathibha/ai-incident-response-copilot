@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%" style="background-color: #060911; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="card-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="accent-box" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="purple-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="green-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="40" y="30" width="1120" height="70" rx="12" fill="url(#card-bg)" stroke="#1e293b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="70" y="72" fill="#00f0ff" font-size="24" font-weight="800" letter-spacing="0.5">🛡️ AI INCIDENT RESPONSE &amp; SECOPS COPILOT</text>
+  <text x="680" y="72" fill="#94a3b8" font-size="14" font-weight="600">System Architecture &amp; Data Pipeline • Engineered by Sanjay Pramod Prathibha</text>
+
+  <!-- 1. Telemetry Ingestion Layer (Left) -->
+  <rect x="40" y="130" width="220" height="630" rx="14" fill="url(#card-bg)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="55" y="145" width="190" height="36" rx="6" fill="#1e293b"/>
+  <text x="150" y="168" fill="#38bdf8" font-size="13" font-weight="700" text-anchor="middle">📥 Telemetry Sources</text>
+
+  <!-- Telemetry Items -->
+  <g transform="translate(55, 200)">
+    <rect x="0" y="0" width="190" height="55" rx="8" fill="url(#accent-box)" stroke="#475569" stroke-width="1"/>
+    <text x="15" y="24" fill="#ffffff" font-size="13" font-weight="700">Microsoft Sentinel</text>
+    <text x="15" y="42" fill="#94a3b8" font-size="11">Cloud SIEM Telemetry</text>
+
+    <rect x="0" y="70" width="190" height="55" rx="8" fill="url(#accent-box)" stroke="#475569" stroke-width="1"/>
+    <text x="15" y="94" fill="#ffffff" font-size="13" font-weight="700">CrowdStrike Falcon</text>
+    <text x="15" y="112" fill="#94a3b8" font-size="11">EDR Detections &amp; Process</text>
+
+    <rect x="0" y="140" width="190" height="55" rx="8" fill="url(#accent-box)" stroke="#475569" stroke-width="1"/>
+    <text x="15" y="164" fill="#ffffff" font-size="13" font-weight="700">Splunk Enterprise</text>
+    <text x="15" y="182" fill="#94a3b8" font-size="11">Security Audit Logs</text>
+
+    <rect x="0" y="210" width="190" height="55" rx="8" fill="url(#accent-box)" stroke="#475569" stroke-width="1"/>
+    <text x="15" y="234" fill="#ffffff" font-size="13" font-weight="700">Suricata / Snort</text>
+    <text x="15" y="252" fill="#94a3b8" font-size="11">NIDS Packet Inspection</text>
+
+    <rect x="0" y="280" width="190" height="55" rx="8" fill="url(#accent-box)" stroke="#475569" stroke-width="1"/>
+    <text x="15" y="304" fill="#ffffff" font-size="13" font-weight="700">Palo Alto PAN-OS</text>
+    <text x="15" y="322" fill="#94a3b8" font-size="11">Next-Gen Firewall Logs</text>
+
+    <rect x="0" y="350" width="190" height="150" rx="8" fill="url(#accent-box)" stroke="#00f0ff" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="15" y="374" fill="#00f0ff" font-size="13" font-weight="700">Batch File Ingest</text>
+    <text x="15" y="396" fill="#cbd5e1" font-size="11">• Multi-format JSON / CSV</text>
+    <text x="15" y="416" fill="#cbd5e1" font-size="11">• Raw Log Stream Files</text>
+    <text x="15" y="436" fill="#cbd5e1" font-size="11">• Ingested Batch Manager</text>
+    <text x="15" y="456" fill="#cbd5e1" font-size="11">• Source File Purge API</text>
+    <text x="15" y="476" fill="#cbd5e1" font-size="11">• Schema Normalization</text>
+  </g>
+
+  <!-- Arrows 1 -> 2 -->
+  <path d="M 260 445 L 300 445" stroke="#00f0ff" stroke-width="2.5" stroke-dasharray="5 5"/>
+  <polygon points="305,445 295,440 295,450" fill="#00f0ff"/>
+
+  <!-- 2. FastAPI Core Backend Layer (Middle Core) -->
+  <rect x="310" y="130" width="580" height="630" rx="14" fill="url(#card-bg)" stroke="#0284c7" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="325" y="145" width="550" height="36" rx="6" fill="#0369a1"/>
+  <text x="600" y="168" fill="#ffffff" font-size="14" font-weight="800" text-anchor="middle">⚡ FastAPI Backend Engine (App / Services)</text>
+
+  <!-- Engine Modules inside Backend -->
+  <!-- Module 1: Risk & ATT&CK -->
+  <g transform="translate(330, 200)">
+    <rect x="0" y="0" width="260" height="155" rx="10" fill="url(#accent-box)" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="15" y="26" fill="#60a5fa" font-size="14" font-weight="700">🎯 Analysis &amp; ATT&amp;CK Engine</text>
+    <text x="15" y="50" fill="#cbd5e1" font-size="11">● Risk Scoring (analyzer.py)</text>
+    <text x="15" y="68" fill="#94a3b8" font-size="10" style="font-family:monospace">  Risk 0-100 &amp; Priority Class</text>
+    <text x="15" y="90" fill="#cbd5e1" font-size="11">● MITRE ATT&amp;CK v14 (mitre.py)</text>
+    <text x="15" y="108" fill="#94a3b8" font-size="10" style="font-family:monospace">  11 Tactics &amp; Technique Rules</text>
+    <text x="15" y="130" fill="#cbd5e1" font-size="11">● IOC Extractor (regex)</text>
+    <text x="15" y="142" fill="#94a3b8" font-size="10" style="font-family:monospace">  IP, Hash, Domain, URL Parsing</text>
+  </g>
+
+  <!-- Module 2: Live CTI Engine -->
+  <g transform="translate(610, 200)">
+    <rect x="0" y="0" width="260" height="155" rx="10" fill="url(#accent-box)" stroke="#10b981" stroke-width="1.5"/>
+    <text x="15" y="26" fill="#34d399" font-size="14" font-weight="700">🌐 Threat Intel Pipeline</text>
+    <text x="15" y="50" fill="#cbd5e1" font-size="11">● AbuseIPDB v2 REST API</text>
+    <text x="15" y="68" fill="#94a3b8" font-size="10" style="font-family:monospace">  IP Reputation &amp; Confidence %</text>
+    <text x="15" y="90" fill="#cbd5e1" font-size="11">● VirusTotal v3 REST API</text>
+    <text x="15" y="108" fill="#94a3b8" font-size="10" style="font-family:monospace">  90+ Security Vendor Engines</text>
+    <text x="15" y="130" fill="#cbd5e1" font-size="11">● Local Rule Fallback</text>
+    <text x="15" y="142" fill="#94a3b8" font-size="10" style="font-family:monospace">  Zero-Crash Offline Mode</text>
+  </g>
+
+  <!-- Module 3: SOAR Playbook Generator -->
+  <g transform="translate(330, 375)">
+    <rect x="0" y="0" width="260" height="155" rx="10" fill="url(#accent-box)" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="15" y="26" fill="#fbbf24" font-size="14" font-weight="700">⚡ SOAR Playbook Generator</text>
+    <text x="15" y="50" fill="#cbd5e1" font-size="11">● Windows PowerShell</text>
+    <text x="15" y="68" fill="#94a3b8" font-size="10" style="font-family:monospace">  New-NetFirewallRule &amp; Disable-AD</text>
+    <text x="15" y="90" fill="#cbd5e1" font-size="11">● Linux Bash Scripting</text>
+    <text x="15" y="108" fill="#94a3b8" font-size="10" style="font-family:monospace">  iptables -DROP &amp; pkill -9</text>
+    <text x="15" y="130" fill="#cbd5e1" font-size="11">● Enterprise Firewall CLI</text>
+    <text x="15" y="142" fill="#94a3b8" font-size="10" style="font-family:monospace">  Palo Alto PAN-OS &amp; Cisco ASA</text>
+  </g>
+
+  <!-- Module 4: STIX 2.1 & Reports -->
+  <g transform="translate(610, 375)">
+    <rect x="0" y="0" width="260" height="155" rx="10" fill="url(#accent-box)" stroke="#ec4899" stroke-width="1.5"/>
+    <text x="15" y="26" fill="#f472b6" font-size="14" font-weight="700">🛡️ STIX 2.1 &amp; Executive Export</text>
+    <text x="15" y="50" fill="#cbd5e1" font-size="11">● OASIS STIX 2.1 Exporter</text>
+    <text x="15" y="68" fill="#94a3b8" font-size="10" style="font-family:monospace">  JSON SDOs &amp; SRO Relationships</text>
+    <text x="15" y="90" fill="#cbd5e1" font-size="11">● CISO PDF Report Engine</text>
+    <text x="15" y="108" fill="#94a3b8" font-size="10" style="font-family:monospace">  ReportLab Vector PDF Layout</text>
+    <text x="15" y="130" fill="#cbd5e1" font-size="11">● Markdown Export &amp; Audit Log</text>
+    <text x="15" y="142" fill="#94a3b8" font-size="10" style="font-family:monospace">  Timeline Audit Trail Persistence</text>
+  </g>
+
+  <!-- Bottom Core Storage Component -->
+  <g transform="translate(330, 550)">
+    <rect x="0" y="0" width="540" height="185" rx="10" fill="#0f172a" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="270" y="28" fill="#00f0ff" font-size="14" font-weight="800" text-anchor="middle">💾 SQLite Persistence &amp; Database Layer (store.py)</text>
+
+    <rect x="20" y="45" width="150" height="120" rx="6" fill="#1e293b"/>
+    <text x="95" y="68" fill="#e2e8f0" font-size="12" font-weight="700" text-anchor="middle">Incidents DB</text>
+    <text x="30" y="90" fill="#94a3b8" font-size="10">• Incidents Table</text>
+    <text x="30" y="106" fill="#94a3b8" font-size="10">• Alert Schema</text>
+    <text x="30" y="122" fill="#94a3b8" font-size="10">• Risk Assessment</text>
+    <text x="30" y="138" fill="#94a3b8" font-size="10">• Source File Track</text>
+
+    <rect x="195" y="45" width="150" height="120" rx="6" fill="#1e293b"/>
+    <text x="270" y="68" fill="#e2e8f0" font-size="12" font-weight="700" text-anchor="middle">Audit Trail DB</text>
+    <text x="205" y="90" fill="#94a3b8" font-size="10">• Status Changes</text>
+    <text x="205" y="106" fill="#94a3b8" font-size="10">• Analyst Notes</text>
+    <text x="205" y="122" fill="#94a3b8" font-size="10">• Action Timestamps</text>
+    <text x="205" y="138" fill="#94a3b8" font-size="10">• Sanjay Attribution</text>
+
+    <rect x="370" y="45" width="150" height="120" rx="6" fill="#1e293b"/>
+    <text x="445" y="68" fill="#e2e8f0" font-size="12" font-weight="700" text-anchor="middle">Batch Purge API</text>
+    <text x="380" y="90" fill="#94a3b8" font-size="10">• Single Case Delete</text>
+    <text x="380" y="106" fill="#94a3b8" font-size="10">• Source File Purge</text>
+    <text x="380" y="122" fill="#94a3b8" font-size="10">• Bulk Database Reset</text>
+    <text x="380" y="138" fill="#94a3b8" font-size="10">• Atomic SQLite SQL</text>
+  </g>
+
+  <!-- Arrows 2 -> 3 -->
+  <path d="M 890 445 L 930 445" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="5 5"/>
+  <polygon points="935,445 925,440 925,450" fill="#a855f7"/>
+
+  <!-- 3. Presentation & AI Copilot Layer (Right) -->
+  <rect x="940" y="130" width="220" height="630" rx="14" fill="url(#card-bg)" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="955" y="145" width="190" height="36" rx="6" fill="#7e22ce"/>
+  <text x="1050" y="168" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">🤖 Copilot &amp; Web UX</text>
+
+  <g transform="translate(955, 200)">
+    <!-- Gemini AI Box -->
+    <rect x="0" y="0" width="190" height="175" rx="8" fill="url(#accent-box)" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="15" y="24" fill="#c084fc" font-size="13" font-weight="800">Google Gemini AI</text>
+    <text x="15" y="44" fill="#cbd5e1" font-size="11">● Prompt Router Engine</text>
+    <text x="15" y="62" fill="#94a3b8" font-size="10">  (ai_explainer.py)</text>
+    <text x="15" y="82" fill="#cbd5e1" font-size="11">● 4-Part Report Prompts</text>
+    <text x="15" y="100" fill="#cbd5e1" font-size="11">● Interactive Analyst Q&amp;A</text>
+    <text x="15" y="118" fill="#cbd5e1" font-size="11">● Typewriter Streaming</text>
+    <text x="15" y="136" fill="#cbd5e1" font-size="11">● Scanline Radar Pulse</text>
+    <text x="15" y="154" fill="#cbd5e1" font-size="11">● Smooth Auto-Scroll</text>
+
+    <!-- Glassmorphic Dashboard UI Box -->
+    <rect x="0" y="195" width="190" height="305" rx="8" fill="url(#accent-box)" stroke="#00f0ff" stroke-opacity="0.5" stroke-width="1.5"/>
+    <text x="15" y="220" fill="#00f0ff" font-size="13" font-weight="800">Web UI (HTML5/CSS)</text>
+    <text x="15" y="242" fill="#cbd5e1" font-size="11">• Plus Jakarta Typography</text>
+    <text x="15" y="260" fill="#cbd5e1" font-size="11">• JetBrains Mono Telemetry</text>
+    <text x="15" y="278" fill="#cbd5e1" font-size="11">• Dead-Centered Tabs</text>
+    <text x="15" y="296" fill="#cbd5e1" font-size="11">• 1-Click Severity Pills</text>
+    <text x="15" y="314" fill="#cbd5e1" font-size="11">• Interactive IOC Copy</text>
+    <text x="15" y="332" fill="#cbd5e1" font-size="11">• Responsive Mobile Layout</text>
+    <text x="15" y="350" fill="#cbd5e1" font-size="11">• Dark Obsidian Theme</text>
+    <text x="15" y="368" fill="#cbd5e1" font-size="11">• Glassmorphism Cards</text>
+    <text x="15" y="386" fill="#cbd5e1" font-size="11">• Sanjay Branding Badges</text>
+    <text x="15" y="404" fill="#cbd5e1" font-size="11">• Live CTI Status Badges</text>
+    <text x="15" y="422" fill="#cbd5e1" font-size="11">• PDF / Markdown Export</text>
+    <text x="15" y="440" fill="#cbd5e1" font-size="11">• STIX 2.1 File Download</text>
+    <text x="15" y="458" fill="#cbd5e1" font-size="11">• SOAR Script Tab Viewer</text>
+    <text x="15" y="476" fill="#cbd5e1" font-size="11">• ATT&amp;CK Heatmap Matrix</text>
+  </g>
+</svg>

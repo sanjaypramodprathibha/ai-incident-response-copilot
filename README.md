@@ -34,6 +34,12 @@ An enterprise-grade, local-first **Defensive Cybersecurity & Security Operations
 
 ---
 
+## 🏗️ System Architecture Diagram
+
+![System Architecture Diagram](docs/assets/architecture_diagram.svg)
+
+---
+
 ## 🌟 Key Features & Architecture
 
 ### 1. 📥 Multi-Format Alert Ingestion & Batch Management
