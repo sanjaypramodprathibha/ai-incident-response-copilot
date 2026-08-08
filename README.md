@@ -17,7 +17,18 @@ An enterprise-grade, local-first **Defensive Cybersecurity & Security Operations
 
 * **Developer:** **Sanjay Pramod Prathibha**
 * **LinkedIn:** [linkedin.com/in/sanjay-p-p](https://www.linkedin.com/in/sanjay-p-p/)
-* **GitHub:** [github.com/sanjaypramodprathibha](https://github.com/sanjaypramodprathibha)
+---
+
+## 📸 Platform Screenshots
+
+### 🛡️ Case Triage Queue & AI Analyst Workbench
+![Case Triage Queue](docs/assets/dashboard_triage.png)
+
+### 🌐 Threat Intelligence Center & CTI API Status
+![Threat Intelligence Center](docs/assets/threat_intel.png)
+
+### 🎯 MITRE ATT&CK Enterprise Matrix v14 Heatmap
+![MITRE ATT&CK Matrix](docs/assets/mitre_matrix.png)
 
 ---
 
