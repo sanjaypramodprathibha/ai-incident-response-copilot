@@ -9,6 +9,8 @@
 
 > 🌐 **Permanent 24/7 Live Web Demo:** [https://ai-incident-response-copilot.onrender.com](https://ai-incident-response-copilot.onrender.com)
 
+![AI Incident Response Copilot Live Demo](docs/assets/demo_walkthrough.gif)
+
 An enterprise-grade, local-first **Defensive Cybersecurity & Security Operations (SecOps) Platform** powered by **FastAPI** and **Gemini AI Copilot**. Designed for SOC Analysts, Incident Responders, and Security Engineers to automate alert triage, evaluate risk scores, map behaviors against MITRE ATT&CK Enterprise Matrix v14, generate executable SOAR containment playbooks, enrich threat intelligence via AbuseIPDB and VirusTotal, and export OASIS STIX 2.1 threat exchange bundles.
 
 ---
