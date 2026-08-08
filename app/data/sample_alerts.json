@@ -1,0 +1,36 @@
+[
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "sentinel-demo-001",
+    "title": "Encoded PowerShell observed on finance workstation",
+    "description": "Defender detected powershell.exe launched with -enc by WIN-FIN-22. The process attempted a connection to 198.51.100.10. Validate the process tree and approved administration activity.",
+    "severity": "high",
+    "timestamp": "2026-08-05T09:20:00Z",
+    "entities": {"host": "WIN-FIN-22", "user": "sam.lee@example.test"},
+    "raw_event": {"event_id": 4688, "process": "powershell.exe -enc <redacted>", "parent_process": "winword.exe"},
+    "tags": ["endpoint", "powershell", "demo"]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "sentinel-demo-002",
+    "title": "Repeated failed sign-ins followed by successful login",
+    "description": "Account alex.chen@example.test had 14 failed sign-in attempts from 203.0.113.77 before a successful login. Review MFA and conditional access activity for possible password spray or valid account use.",
+    "severity": "high",
+    "timestamp": "2026-08-05T09:34:00Z",
+    "entities": {"user": "alex.chen@example.test", "ip": "203.0.113.77"},
+    "raw_event": {"provider": "Entra ID", "failed_attempts": 14, "result": "success"},
+    "tags": ["identity", "authentication", "demo"]
+  },
+  {
+    "source": "Email Security Gateway",
+    "external_id": "mail-demo-003",
+    "title": "Suspicious email with credential harvest link",
+    "description": "A suspicious email delivered to procurement referenced https://signin-check.example.test/login. The message requested a credential refresh and has been held for analyst review.",
+    "severity": "medium",
+    "timestamp": "2026-08-05T09:45:00Z",
+    "entities": {"mailbox": "procurement@example.test"},
+    "raw_event": {"sender": "billing@outside.test", "delivery_action": "held"},
+    "tags": ["email", "phishing", "demo"]
+  }
+]
+

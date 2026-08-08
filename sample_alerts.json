@@ -1,0 +1,37 @@
+[
+    {
+      "source": "Microsoft Sentinel",
+      "external_id": "INC-1001",
+      "severity": "high",
+      "title": "Multiple failed logins followed by successful login",
+      "description": "User sanjay@example.com had 12 failed login attempts from IP 185.220.101.45 followed by a successful login from the same address."
+    },
+    {
+      "source": "CrowdStrike Falcon",
+      "external_id": "INC-1002",
+      "severity": "critical",
+      "title": "Encoded PowerShell execution detected",
+      "description": "Suspicious encoded PowerShell command executed on FINANCE-PC-07. Parent process was WINWORD.EXE."
+    },
+    {
+      "source": "Microsoft Defender",
+      "external_id": "INC-1003",
+      "severity": "medium",
+      "title": "Phishing email detected",
+      "description": "Email from billing@company-payments.com contains URL https://secure-company-login.example.com requesting credential verification."
+    },
+    {
+      "source": "Microsoft Sentinel",
+      "external_id": "INC-1004",
+      "severity": "high",
+      "title": "Impossible travel detected",
+      "description": "User authenticated from India and Germany within 18 minutes. MFA challenge was completed successfully."
+    },
+    {
+      "source": "Sysmon",
+      "external_id": "INC-1005",
+      "severity": "critical",
+      "title": "Credential dumping attempt",
+      "description": "Process mimikatz.exe attempted to access LSASS memory on WS-014."
+    }
+  ]
