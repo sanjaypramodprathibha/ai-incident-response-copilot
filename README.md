@@ -1,10 +1,13 @@
 # 🛡️ AI Incident Response & SecOps Copilot
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-onrender.com-00f0ff?style=for-the-badge&logo=render&logoColor=white)](https://ai-incident-response-copilot.onrender.com)
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![STIX 2.1](https://img.shields.io/badge/OASIS-STIX%202.1-orange.svg)](https://oasis-open.github.io/cti-documentation/)
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-v14-red.svg)](https://attack.mitre.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+> 🌐 **Permanent 24/7 Live Web Demo:** [https://ai-incident-response-copilot.onrender.com](https://ai-incident-response-copilot.onrender.com)
 
 An enterprise-grade, local-first **Defensive Cybersecurity & Security Operations (SecOps) Platform** powered by **FastAPI** and **Gemini AI Copilot**. Designed for SOC Analysts, Incident Responders, and Security Engineers to automate alert triage, evaluate risk scores, map behaviors against MITRE ATT&CK Enterprise Matrix v14, generate executable SOAR containment playbooks, enrich threat intelligence via AbuseIPDB and VirusTotal, and export OASIS STIX 2.1 threat exchange bundles.
 
