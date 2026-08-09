@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, Response, FileResponse
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from fastapi.templating import Jinja2Templates
@@ -156,6 +156,17 @@ async def load_demo_alerts() -> list[Incident]:
     except (OSError, json.JSONDecodeError) as error:
         raise HTTPException(status_code=500, detail="Bundled sample alerts could not be loaded.") from error
     return await ingest_alerts([AlertInput.model_validate(record) for record in records])
+
+
+@app.get("/api/demo/sample-file")
+async def download_sample_alert_file():
+    if not SAMPLE_ALERTS_PATH.exists():
+        raise HTTPException(status_code=404, detail="Sample alerts file not found.")
+    return FileResponse(
+        path=SAMPLE_ALERTS_PATH,
+        filename="sample_alerts.json",
+        media_type="application/json"
+    )
 
 
 @app.get("/api/incidents", response_model=list[Incident])
