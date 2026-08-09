@@ -1,36 +1,1159 @@
 [
   {
     "source": "Microsoft Sentinel",
-    "external_id": "sentinel-demo-001",
-    "title": "Encoded PowerShell observed on finance workstation",
-    "description": "Defender detected powershell.exe launched with -enc by WIN-FIN-22. The process attempted a connection to 198.51.100.10. Validate the process tree and approved administration activity.",
+    "external_id": "ALERT-2026-0001",
+    "title": "Encoded PowerShell execution with C2 outbound beaconing (Ref #1)",
+    "description": "powershell.exe executed with -EncodedCommand -NoProfile by WIN-FIN-88. Outbound connection initiated to 198.51.100.45:8443 (Known Cobalt Strike C2).",
+    "severity": "critical",
+    "timestamp": "2026-08-07T09:06:21Z",
+    "entities": {
+      "host": "WIN-FIN-88",
+      "user": "finance_admin@corp.test",
+      "ip": "198.51.100.45",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0001",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 8649,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "powershell",
+      "c2",
+      "execution"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0002",
+    "title": "Ransomware Shadow Copy Deletion Attempt (Ref #2)",
+    "description": "vssadmin.exe Delete Shadows /All /Quiet executed on FILESRV-01 by user SYSTEM. Volume Shadow Copies targeted for destruction before file encryption.",
+    "severity": "critical",
+    "timestamp": "2026-08-07T10:01:21Z",
+    "entities": {
+      "host": "FILESRV-01",
+      "user": "SYSTEM",
+      "process": "vssadmin.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0002",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 7461,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "ransomware",
+      "vssadmin",
+      "defense-evasion"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0003",
+    "title": "Credential Dumping via Mimikatz / Lsass Memory Read (Ref #3)",
+    "description": "lsass.exe memory access granted to untrusted process rundll32.exe with permissions 0x1010 on DC-PRIMARY-01.",
+    "severity": "critical",
+    "timestamp": "2026-08-07T10:56:21Z",
+    "entities": {
+      "host": "DC-PRIMARY-01",
+      "user": "admin_svc",
+      "process": "rundll32.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0003",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 8833,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "credential-dumping",
+      "mimikatz",
+      "lsass"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0004",
+    "title": "Kerberoasting Ticket Request Volume Spike (Ref #4)",
+    "description": "Active Directory Kerberos TGS request anomaly detected. User dev_test requested SPN tickets for 45 service accounts within 2 minutes.",
     "severity": "high",
-    "timestamp": "2026-08-05T09:20:00Z",
-    "entities": {"host": "WIN-FIN-22", "user": "sam.lee@example.test"},
-    "raw_event": {"event_id": 4688, "process": "powershell.exe -enc <redacted>", "parent_process": "winword.exe"},
-    "tags": ["endpoint", "powershell", "demo"]
+    "timestamp": "2026-08-07T11:51:21Z",
+    "entities": {
+      "user": "dev_test@corp.test",
+      "host": "DC-SECONDARY-02"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0004",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 7907,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "kerberoasting",
+      "active-directory",
+      "credential-access"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0005",
+    "title": "Password Spray Attack Detected Across Entra ID (Ref #5)",
+    "description": "Account login failures detected across 28 distinct corporate accounts originating from external IP 203.0.113.195 within 15 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-07T12:46:21Z",
+    "entities": {
+      "ip": "203.0.113.195",
+      "source": "Entra ID"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0005",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 9698,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "password-spray",
+      "entra-id",
+      "brute-force"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0006",
+    "title": "Scheduled Task Creation for Lateral Movement (Ref #6)",
+    "description": "schtasks.exe created persistent daily task 'UpdateCheck' executing payload C:\\Users\\Public\\updater.exe on WORKSTATION-402.",
+    "severity": "high",
+    "timestamp": "2026-08-07T13:41:21Z",
+    "entities": {
+      "host": "WORKSTATION-402",
+      "user": "sarah.m@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0006",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 5705,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "persistence",
+      "scheduled-task"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0007",
+    "title": "DNS Tunneling Payload Query Observed (Ref #7)",
+    "description": "High volume of long subdomains queried for c2.malicious-domain.test. Indicative of Cobalt Strike DNS C2 data exfiltration.",
+    "severity": "high",
+    "timestamp": "2026-08-07T14:36:21Z",
+    "entities": {
+      "domain": "c2.malicious-domain.test",
+      "ip": "192.0.2.89"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0007",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 9647,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "dns-tunneling",
+      "c2",
+      "exfiltration"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0008",
+    "title": "Suspicious Lateral Movement via PsExec / SMB (Ref #8)",
+    "description": "PsExec service creation detected on SERVER-WEB-02. Remote service execution initiated by domain admin account from 10.0.4.12.",
+    "severity": "high",
+    "timestamp": "2026-08-07T15:31:21Z",
+    "entities": {
+      "host": "SERVER-WEB-02",
+      "user": "admin_domain",
+      "ip": "10.0.4.12"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0008",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 5382,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "psexec",
+      "lateral-movement",
+      "smb"
+    ]
   },
   {
     "source": "Microsoft Sentinel",
-    "external_id": "sentinel-demo-002",
-    "title": "Repeated failed sign-ins followed by successful login",
-    "description": "Account alex.chen@example.test had 14 failed sign-in attempts from 203.0.113.77 before a successful login. Review MFA and conditional access activity for possible password spray or valid account use.",
-    "severity": "high",
-    "timestamp": "2026-08-05T09:34:00Z",
-    "entities": {"user": "alex.chen@example.test", "ip": "203.0.113.77"},
-    "raw_event": {"provider": "Entra ID", "failed_attempts": 14, "result": "success"},
-    "tags": ["identity", "authentication", "demo"]
+    "external_id": "ALERT-2026-0009",
+    "title": "Web Shell Upload Detected on IIS Server (Ref #9)",
+    "description": "New ASPX file cmd.aspx written to C:\\inetpub\\wwwroot\\uploads\\ by w3wp.exe process. Subsequent POST request received.",
+    "severity": "critical",
+    "timestamp": "2026-08-07T16:26:21Z",
+    "entities": {
+      "host": "WEB-FRONTEND-01",
+      "url": "https://company.test/uploads/cmd.aspx"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0009",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 3355,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "webshell",
+      "persistence",
+      "iis"
+    ]
   },
   {
-    "source": "Email Security Gateway",
-    "external_id": "mail-demo-003",
-    "title": "Suspicious email with credential harvest link",
-    "description": "A suspicious email delivered to procurement referenced https://signin-check.example.test/login. The message requested a credential refresh and has been held for analyst review.",
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0010",
+    "title": "AWS IAM Root Account Access Without MFA (Ref #10)",
+    "description": "AWS Console Login observed for AWS Root Account without Multi-Factor Authentication from IP 198.51.100.200.",
+    "severity": "high",
+    "timestamp": "2026-08-07T17:21:21Z",
+    "entities": {
+      "user": "root",
+      "ip": "198.51.100.200"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0010",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 7483,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "aws",
+      "cloud",
+      "iam"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0011",
+    "title": "SSH Brute Force Attack from Known Botnet IP (Ref #11)",
+    "description": "Over 250 failed SSH authentication attempts on Linux bastion host LINUX-GATEWAY-01 from 198.51.100.77.",
     "severity": "medium",
-    "timestamp": "2026-08-05T09:45:00Z",
-    "entities": {"mailbox": "procurement@example.test"},
-    "raw_event": {"sender": "billing@outside.test", "delivery_action": "held"},
-    "tags": ["email", "phishing", "demo"]
+    "timestamp": "2026-08-07T18:16:21Z",
+    "entities": {
+      "host": "LINUX-GATEWAY-01",
+      "ip": "198.51.100.77"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0011",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 9353,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "ssh",
+      "brute-force",
+      "linux"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0012",
+    "title": "Credential Harvest Phishing Link Clicked (Ref #12)",
+    "description": "User robert.k@corp.test opened email link directing to http://login-update-auth.example.test/signin.",
+    "severity": "medium",
+    "timestamp": "2026-08-07T19:11:21Z",
+    "entities": {
+      "user": "robert.k@corp.test",
+      "url": "http://login-update-auth.example.test/signin"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0012",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 6412,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "phishing",
+      "email"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0013",
+    "title": "Large Outbound Data Transfer to Unknown Cloud Storage (Ref #13)",
+    "description": "Workstation MAC-DESIGN-09 uploaded 14.2 GB of archive files to mega.nz via HTTPS within 30 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-07T20:06:21Z",
+    "entities": {
+      "host": "MAC-DESIGN-09",
+      "user": "designer@corp.test",
+      "domain": "mega.nz"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0013",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 8751,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "exfiltration",
+      "data-leak"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0014",
+    "title": "Unauthorized Port Scan Detected on Internal Subnet (Ref #14)",
+    "description": "Internal IP 10.0.12.44 initiated SYN port scan targeting 254 hosts across VLAN 10.0.12.0/24.",
+    "severity": "medium",
+    "timestamp": "2026-08-07T21:01:21Z",
+    "entities": {
+      "ip": "10.0.12.44",
+      "subnet": "10.0.12.0/24"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0014",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 8449,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "reconnaissance",
+      "port-scan"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0015",
+    "title": "Disable Windows Defender Real-Time Monitoring (Ref #15)",
+    "description": "Set-MpPreference -DisableRealtimeMonitoring $true executed via PowerShell on HR-DESKTOP-15.",
+    "severity": "high",
+    "timestamp": "2026-08-07T21:56:21Z",
+    "entities": {
+      "host": "HR-DESKTOP-15",
+      "user": "hr_user@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0015",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 5499,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "defense-evasion",
+      "antivirus"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0016",
+    "title": "Encoded PowerShell execution with C2 outbound beaconing (Ref #16)",
+    "description": "powershell.exe executed with -EncodedCommand -NoProfile by WIN-FIN-88. Outbound connection initiated to 198.51.100.45:8443 (Known Cobalt Strike C2).",
+    "severity": "critical",
+    "timestamp": "2026-08-07T22:51:21Z",
+    "entities": {
+      "host": "WIN-FIN-88",
+      "user": "finance_admin@corp.test",
+      "ip": "198.51.100.45",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0016",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 7469,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "powershell",
+      "c2",
+      "execution"
+    ]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "ALERT-2026-0017",
+    "title": "Ransomware Shadow Copy Deletion Attempt (Ref #17)",
+    "description": "vssadmin.exe Delete Shadows /All /Quiet executed on FILESRV-01 by user SYSTEM. Volume Shadow Copies targeted for destruction before file encryption.",
+    "severity": "critical",
+    "timestamp": "2026-08-07T23:46:21Z",
+    "entities": {
+      "host": "FILESRV-01",
+      "user": "SYSTEM",
+      "process": "vssadmin.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0017",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 9181,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "ransomware",
+      "vssadmin",
+      "defense-evasion"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0018",
+    "title": "Credential Dumping via Mimikatz / Lsass Memory Read (Ref #18)",
+    "description": "lsass.exe memory access granted to untrusted process rundll32.exe with permissions 0x1010 on DC-PRIMARY-01.",
+    "severity": "critical",
+    "timestamp": "2026-08-08T00:41:21Z",
+    "entities": {
+      "host": "DC-PRIMARY-01",
+      "user": "admin_svc",
+      "process": "rundll32.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0018",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 8779,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "credential-dumping",
+      "mimikatz",
+      "lsass"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0019",
+    "title": "Kerberoasting Ticket Request Volume Spike (Ref #19)",
+    "description": "Active Directory Kerberos TGS request anomaly detected. User dev_test requested SPN tickets for 45 service accounts within 2 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T01:36:21Z",
+    "entities": {
+      "user": "dev_test@corp.test",
+      "host": "DC-SECONDARY-02"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0019",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 4688,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "kerberoasting",
+      "active-directory",
+      "credential-access"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0020",
+    "title": "Password Spray Attack Detected Across Entra ID (Ref #20)",
+    "description": "Account login failures detected across 28 distinct corporate accounts originating from external IP 203.0.113.195 within 15 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T02:31:21Z",
+    "entities": {
+      "ip": "203.0.113.195",
+      "source": "Entra ID"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0020",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 5539,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "password-spray",
+      "entra-id",
+      "brute-force"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0021",
+    "title": "Scheduled Task Creation for Lateral Movement (Ref #21)",
+    "description": "schtasks.exe created persistent daily task 'UpdateCheck' executing payload C:\\Users\\Public\\updater.exe on WORKSTATION-402.",
+    "severity": "high",
+    "timestamp": "2026-08-08T03:26:21Z",
+    "entities": {
+      "host": "WORKSTATION-402",
+      "user": "sarah.m@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0021",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 5910,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "persistence",
+      "scheduled-task"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0022",
+    "title": "DNS Tunneling Payload Query Observed (Ref #22)",
+    "description": "High volume of long subdomains queried for c2.malicious-domain.test. Indicative of Cobalt Strike DNS C2 data exfiltration.",
+    "severity": "high",
+    "timestamp": "2026-08-08T04:21:21Z",
+    "entities": {
+      "domain": "c2.malicious-domain.test",
+      "ip": "192.0.2.89"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0022",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 1419,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "dns-tunneling",
+      "c2",
+      "exfiltration"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0023",
+    "title": "Suspicious Lateral Movement via PsExec / SMB (Ref #23)",
+    "description": "PsExec service creation detected on SERVER-WEB-02. Remote service execution initiated by domain admin account from 10.0.4.12.",
+    "severity": "high",
+    "timestamp": "2026-08-08T05:16:21Z",
+    "entities": {
+      "host": "SERVER-WEB-02",
+      "user": "admin_domain",
+      "ip": "10.0.4.12"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0023",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 2931,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "psexec",
+      "lateral-movement",
+      "smb"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0024",
+    "title": "Web Shell Upload Detected on IIS Server (Ref #24)",
+    "description": "New ASPX file cmd.aspx written to C:\\inetpub\\wwwroot\\uploads\\ by w3wp.exe process. Subsequent POST request received.",
+    "severity": "critical",
+    "timestamp": "2026-08-08T06:11:21Z",
+    "entities": {
+      "host": "WEB-FRONTEND-01",
+      "url": "https://company.test/uploads/cmd.aspx"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0024",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 2040,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "webshell",
+      "persistence",
+      "iis"
+    ]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "ALERT-2026-0025",
+    "title": "AWS IAM Root Account Access Without MFA (Ref #25)",
+    "description": "AWS Console Login observed for AWS Root Account without Multi-Factor Authentication from IP 198.51.100.200.",
+    "severity": "high",
+    "timestamp": "2026-08-08T07:06:21Z",
+    "entities": {
+      "user": "root",
+      "ip": "198.51.100.200"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0025",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 3547,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "aws",
+      "cloud",
+      "iam"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0026",
+    "title": "SSH Brute Force Attack from Known Botnet IP (Ref #26)",
+    "description": "Over 250 failed SSH authentication attempts on Linux bastion host LINUX-GATEWAY-01 from 198.51.100.77.",
+    "severity": "medium",
+    "timestamp": "2026-08-08T08:01:21Z",
+    "entities": {
+      "host": "LINUX-GATEWAY-01",
+      "ip": "198.51.100.77"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0026",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 2366,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "ssh",
+      "brute-force",
+      "linux"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0027",
+    "title": "Credential Harvest Phishing Link Clicked (Ref #27)",
+    "description": "User robert.k@corp.test opened email link directing to http://login-update-auth.example.test/signin.",
+    "severity": "medium",
+    "timestamp": "2026-08-08T08:56:21Z",
+    "entities": {
+      "user": "robert.k@corp.test",
+      "url": "http://login-update-auth.example.test/signin"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0027",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 1479,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "phishing",
+      "email"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0028",
+    "title": "Large Outbound Data Transfer to Unknown Cloud Storage (Ref #28)",
+    "description": "Workstation MAC-DESIGN-09 uploaded 14.2 GB of archive files to mega.nz via HTTPS within 30 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T09:51:21Z",
+    "entities": {
+      "host": "MAC-DESIGN-09",
+      "user": "designer@corp.test",
+      "domain": "mega.nz"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0028",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 4147,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "exfiltration",
+      "data-leak"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0029",
+    "title": "Unauthorized Port Scan Detected on Internal Subnet (Ref #29)",
+    "description": "Internal IP 10.0.12.44 initiated SYN port scan targeting 254 hosts across VLAN 10.0.12.0/24.",
+    "severity": "medium",
+    "timestamp": "2026-08-08T10:46:21Z",
+    "entities": {
+      "ip": "10.0.12.44",
+      "subnet": "10.0.12.0/24"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0029",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 6405,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "reconnaissance",
+      "port-scan"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0030",
+    "title": "Disable Windows Defender Real-Time Monitoring (Ref #30)",
+    "description": "Set-MpPreference -DisableRealtimeMonitoring $true executed via PowerShell on HR-DESKTOP-15.",
+    "severity": "high",
+    "timestamp": "2026-08-08T11:41:21Z",
+    "entities": {
+      "host": "HR-DESKTOP-15",
+      "user": "hr_user@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0030",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 8672,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "defense-evasion",
+      "antivirus"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0031",
+    "title": "Encoded PowerShell execution with C2 outbound beaconing (Ref #31)",
+    "description": "powershell.exe executed with -EncodedCommand -NoProfile by WIN-FIN-88. Outbound connection initiated to 198.51.100.45:8443 (Known Cobalt Strike C2).",
+    "severity": "critical",
+    "timestamp": "2026-08-08T12:36:21Z",
+    "entities": {
+      "host": "WIN-FIN-88",
+      "user": "finance_admin@corp.test",
+      "ip": "198.51.100.45",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0031",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 9743,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "powershell",
+      "c2",
+      "execution"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0032",
+    "title": "Ransomware Shadow Copy Deletion Attempt (Ref #32)",
+    "description": "vssadmin.exe Delete Shadows /All /Quiet executed on FILESRV-01 by user SYSTEM. Volume Shadow Copies targeted for destruction before file encryption.",
+    "severity": "critical",
+    "timestamp": "2026-08-08T13:31:21Z",
+    "entities": {
+      "host": "FILESRV-01",
+      "user": "SYSTEM",
+      "process": "vssadmin.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0032",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 3508,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "ransomware",
+      "vssadmin",
+      "defense-evasion"
+    ]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "ALERT-2026-0033",
+    "title": "Credential Dumping via Mimikatz / Lsass Memory Read (Ref #33)",
+    "description": "lsass.exe memory access granted to untrusted process rundll32.exe with permissions 0x1010 on DC-PRIMARY-01.",
+    "severity": "critical",
+    "timestamp": "2026-08-08T14:26:21Z",
+    "entities": {
+      "host": "DC-PRIMARY-01",
+      "user": "admin_svc",
+      "process": "rundll32.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0033",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 5879,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "credential-dumping",
+      "mimikatz",
+      "lsass"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0034",
+    "title": "Kerberoasting Ticket Request Volume Spike (Ref #34)",
+    "description": "Active Directory Kerberos TGS request anomaly detected. User dev_test requested SPN tickets for 45 service accounts within 2 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T15:21:21Z",
+    "entities": {
+      "user": "dev_test@corp.test",
+      "host": "DC-SECONDARY-02"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0034",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 4790,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "kerberoasting",
+      "active-directory",
+      "credential-access"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0035",
+    "title": "Password Spray Attack Detected Across Entra ID (Ref #35)",
+    "description": "Account login failures detected across 28 distinct corporate accounts originating from external IP 203.0.113.195 within 15 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T16:16:21Z",
+    "entities": {
+      "ip": "203.0.113.195",
+      "source": "Entra ID"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0035",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 7006,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "password-spray",
+      "entra-id",
+      "brute-force"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0036",
+    "title": "Scheduled Task Creation for Lateral Movement (Ref #36)",
+    "description": "schtasks.exe created persistent daily task 'UpdateCheck' executing payload C:\\Users\\Public\\updater.exe on WORKSTATION-402.",
+    "severity": "high",
+    "timestamp": "2026-08-08T17:11:21Z",
+    "entities": {
+      "host": "WORKSTATION-402",
+      "user": "sarah.m@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0036",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 4218,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "persistence",
+      "scheduled-task"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0037",
+    "title": "DNS Tunneling Payload Query Observed (Ref #37)",
+    "description": "High volume of long subdomains queried for c2.malicious-domain.test. Indicative of Cobalt Strike DNS C2 data exfiltration.",
+    "severity": "high",
+    "timestamp": "2026-08-08T18:06:21Z",
+    "entities": {
+      "domain": "c2.malicious-domain.test",
+      "ip": "192.0.2.89"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0037",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 5656,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "dns-tunneling",
+      "c2",
+      "exfiltration"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0038",
+    "title": "Suspicious Lateral Movement via PsExec / SMB (Ref #38)",
+    "description": "PsExec service creation detected on SERVER-WEB-02. Remote service execution initiated by domain admin account from 10.0.4.12.",
+    "severity": "high",
+    "timestamp": "2026-08-08T19:01:21Z",
+    "entities": {
+      "host": "SERVER-WEB-02",
+      "user": "admin_domain",
+      "ip": "10.0.4.12"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0038",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 2051,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "psexec",
+      "lateral-movement",
+      "smb"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0039",
+    "title": "Web Shell Upload Detected on IIS Server (Ref #39)",
+    "description": "New ASPX file cmd.aspx written to C:\\inetpub\\wwwroot\\uploads\\ by w3wp.exe process. Subsequent POST request received.",
+    "severity": "critical",
+    "timestamp": "2026-08-08T19:56:21Z",
+    "entities": {
+      "host": "WEB-FRONTEND-01",
+      "url": "https://company.test/uploads/cmd.aspx"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0039",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 7624,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "webshell",
+      "persistence",
+      "iis"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0040",
+    "title": "AWS IAM Root Account Access Without MFA (Ref #40)",
+    "description": "AWS Console Login observed for AWS Root Account without Multi-Factor Authentication from IP 198.51.100.200.",
+    "severity": "high",
+    "timestamp": "2026-08-08T20:51:21Z",
+    "entities": {
+      "user": "root",
+      "ip": "198.51.100.200"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0040",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 6165,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "aws",
+      "cloud",
+      "iam"
+    ]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "ALERT-2026-0041",
+    "title": "SSH Brute Force Attack from Known Botnet IP (Ref #41)",
+    "description": "Over 250 failed SSH authentication attempts on Linux bastion host LINUX-GATEWAY-01 from 198.51.100.77.",
+    "severity": "medium",
+    "timestamp": "2026-08-08T21:46:21Z",
+    "entities": {
+      "host": "LINUX-GATEWAY-01",
+      "ip": "198.51.100.77"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0041",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 3264,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "ssh",
+      "brute-force",
+      "linux"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0042",
+    "title": "Credential Harvest Phishing Link Clicked (Ref #42)",
+    "description": "User robert.k@corp.test opened email link directing to http://login-update-auth.example.test/signin.",
+    "severity": "medium",
+    "timestamp": "2026-08-08T22:41:21Z",
+    "entities": {
+      "user": "robert.k@corp.test",
+      "url": "http://login-update-auth.example.test/signin"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0042",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 3966,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "phishing",
+      "email"
+    ]
+  },
+  {
+    "source": "Splunk Enterprise",
+    "external_id": "ALERT-2026-0043",
+    "title": "Large Outbound Data Transfer to Unknown Cloud Storage (Ref #43)",
+    "description": "Workstation MAC-DESIGN-09 uploaded 14.2 GB of archive files to mega.nz via HTTPS within 30 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-08T23:36:21Z",
+    "entities": {
+      "host": "MAC-DESIGN-09",
+      "user": "designer@corp.test",
+      "domain": "mega.nz"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0043",
+      "vendor_source": "Splunk Enterprise",
+      "signature_id": 5272,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "exfiltration",
+      "data-leak"
+    ]
+  },
+  {
+    "source": "Palo Alto PAN-OS",
+    "external_id": "ALERT-2026-0044",
+    "title": "Unauthorized Port Scan Detected on Internal Subnet (Ref #44)",
+    "description": "Internal IP 10.0.12.44 initiated SYN port scan targeting 254 hosts across VLAN 10.0.12.0/24.",
+    "severity": "medium",
+    "timestamp": "2026-08-09T00:31:21Z",
+    "entities": {
+      "ip": "10.0.12.44",
+      "subnet": "10.0.12.0/24"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0044",
+      "vendor_source": "Palo Alto PAN-OS",
+      "signature_id": 4730,
+      "severity": "MEDIUM"
+    },
+    "tags": [
+      "reconnaissance",
+      "port-scan"
+    ]
+  },
+  {
+    "source": "Suricata NIDS",
+    "external_id": "ALERT-2026-0045",
+    "title": "Disable Windows Defender Real-Time Monitoring (Ref #45)",
+    "description": "Set-MpPreference -DisableRealtimeMonitoring $true executed via PowerShell on HR-DESKTOP-15.",
+    "severity": "high",
+    "timestamp": "2026-08-09T01:26:21Z",
+    "entities": {
+      "host": "HR-DESKTOP-15",
+      "user": "hr_user@corp.test"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0045",
+      "vendor_source": "Suricata NIDS",
+      "signature_id": 2287,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "defense-evasion",
+      "antivirus"
+    ]
+  },
+  {
+    "source": "AWS GuardDuty",
+    "external_id": "ALERT-2026-0046",
+    "title": "Encoded PowerShell execution with C2 outbound beaconing (Ref #46)",
+    "description": "powershell.exe executed with -EncodedCommand -NoProfile by WIN-FIN-88. Outbound connection initiated to 198.51.100.45:8443 (Known Cobalt Strike C2).",
+    "severity": "critical",
+    "timestamp": "2026-08-09T02:21:21Z",
+    "entities": {
+      "host": "WIN-FIN-88",
+      "user": "finance_admin@corp.test",
+      "ip": "198.51.100.45",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0046",
+      "vendor_source": "AWS GuardDuty",
+      "signature_id": 2596,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "powershell",
+      "c2",
+      "execution"
+    ]
+  },
+  {
+    "source": "Okta Identity Cloud",
+    "external_id": "ALERT-2026-0047",
+    "title": "Ransomware Shadow Copy Deletion Attempt (Ref #47)",
+    "description": "vssadmin.exe Delete Shadows /All /Quiet executed on FILESRV-01 by user SYSTEM. Volume Shadow Copies targeted for destruction before file encryption.",
+    "severity": "critical",
+    "timestamp": "2026-08-09T03:16:21Z",
+    "entities": {
+      "host": "FILESRV-01",
+      "user": "SYSTEM",
+      "process": "vssadmin.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0047",
+      "vendor_source": "Okta Identity Cloud",
+      "signature_id": 7241,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "ransomware",
+      "vssadmin",
+      "defense-evasion"
+    ]
+  },
+  {
+    "source": "Defender for Endpoint",
+    "external_id": "ALERT-2026-0048",
+    "title": "Credential Dumping via Mimikatz / Lsass Memory Read (Ref #48)",
+    "description": "lsass.exe memory access granted to untrusted process rundll32.exe with permissions 0x1010 on DC-PRIMARY-01.",
+    "severity": "critical",
+    "timestamp": "2026-08-09T04:11:21Z",
+    "entities": {
+      "host": "DC-PRIMARY-01",
+      "user": "admin_svc",
+      "process": "rundll32.exe"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0048",
+      "vendor_source": "Defender for Endpoint",
+      "signature_id": 4906,
+      "severity": "CRITICAL"
+    },
+    "tags": [
+      "credential-dumping",
+      "mimikatz",
+      "lsass"
+    ]
+  },
+  {
+    "source": "Microsoft Sentinel",
+    "external_id": "ALERT-2026-0049",
+    "title": "Kerberoasting Ticket Request Volume Spike (Ref #49)",
+    "description": "Active Directory Kerberos TGS request anomaly detected. User dev_test requested SPN tickets for 45 service accounts within 2 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-09T05:06:21Z",
+    "entities": {
+      "user": "dev_test@corp.test",
+      "host": "DC-SECONDARY-02"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0049",
+      "vendor_source": "Microsoft Sentinel",
+      "signature_id": 1908,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "kerberoasting",
+      "active-directory",
+      "credential-access"
+    ]
+  },
+  {
+    "source": "CrowdStrike Falcon",
+    "external_id": "ALERT-2026-0050",
+    "title": "Password Spray Attack Detected Across Entra ID (Ref #50)",
+    "description": "Account login failures detected across 28 distinct corporate accounts originating from external IP 203.0.113.195 within 15 minutes.",
+    "severity": "high",
+    "timestamp": "2026-08-09T06:01:21Z",
+    "entities": {
+      "ip": "203.0.113.195",
+      "source": "Entra ID"
+    },
+    "raw_event": {
+      "alert_id": "SEC-RAW-0050",
+      "vendor_source": "CrowdStrike Falcon",
+      "signature_id": 2750,
+      "severity": "HIGH"
+    },
+    "tags": [
+      "password-spray",
+      "entra-id",
+      "brute-force"
+    ]
   }
 ]
-

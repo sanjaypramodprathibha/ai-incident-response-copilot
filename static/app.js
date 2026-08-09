@@ -550,11 +550,17 @@ async function selectIncident(id) {
 }
 
 async function loadDemo() {
-  const button = $("#load-demo-btn") || $("#load-demo");
-  if (button) { button.disabled = true; button.textContent = "Loading…"; }
-  try { await api("/api/demo/load", { method: "POST" }); await refreshIncidents(true); }
-  catch (error) { showToast(error.message, "error"); }
-  finally { if (button) { button.disabled = false; button.textContent = "⚡ Load 5 Sample SIEM Alerts"; } }
+  const button = $("#demo-alerts-btn") || $("#load-demo-btn") || $("#load-demo");
+  if (button) { button.disabled = true; button.textContent = "Loading 50 Alerts…"; }
+  try {
+    await api("/api/demo/load", { method: "POST" });
+    await refreshIncidents(true);
+    showToast("Successfully loaded 50 sample SIEM alerts!", "success");
+  } catch (error) {
+    showToast(error.message, "error");
+  } finally {
+    if (button) { button.disabled = false; button.textContent = "⚡ 1-Click Load 50 Sample Alerts"; }
+  }
 }
 
 function parseCSV(text) {
@@ -1033,6 +1039,14 @@ if (browseBtn && fileInput) {
   browseBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     fileInput.click();
+  });
+}
+
+const demoBtn = $("#demo-alerts-btn") || $("#load-demo-btn") || $("#load-demo");
+if (demoBtn) {
+  demoBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    loadDemo();
   });
 }
 
